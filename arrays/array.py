@@ -5,6 +5,13 @@ Lists/Arrays
         - Indexing: O(1)
         - Insert: O(N)
         - Popping: O(1) if the end of the list, else O(N)
+        
+Problem Types:
+    - Two Pointers
+    - Case by Case Analysis
+    - 2D Matrix Manipulation
+    - 
+    
 """
 
 def max_three_elements(array):
@@ -64,6 +71,53 @@ def three_sum(array):
                     low += 1
     return res
 
-arr = [-1,0,1,2,-1,-4]
-print(three_sum(arr))
+def next_permutation(nums):
+    k = len(nums) - 2
+    
+    while k >= 0 and nums[k+1] <= nums[k]:
+        k -= 1
+        
+    if k == -1:
+        reverseList(0,len(nums)-1,nums)
+        return nums
+    
+    for i in range(len(nums)-1,-1,-1):
+        if nums[i] > nums[k]:
+            temp = nums[i]
+            nums[i] = nums[k]
+            nums[k] = temp
+            break
+    
+    reverseList(k+1,len(nums)-1,nums)
+    return nums
+    
+def reverseList(start,end,nums):
+    while start <= end:
+        temp = nums[start]
+        nums[start] = nums[end]
+        nums[end] = temp
+        start += 1
+        end -= 1
+    
+
+"""
+Given a 2D array rotate it 90 degrees
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [[7,4,1],[8,5,2],[9,6,3]]
+"""
+
+def rotate_ninety(matrix):
+    
+    for i in range(len(matrix)):
+        for j in range(i):
+            matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+    
+    for i in range(len(matrix)):
+        for j in range(len(matrix)//2):
+            matrix[i][j],matrix[i][len(matrix)-1-j] = matrix[i][len(matrix)-1-j],matrix[i][j]
+    return arr
+arr = [[1,2,3],[4,5,6],[7,8,9]]
+print(rotate_ninety(arr))
+
+
 
