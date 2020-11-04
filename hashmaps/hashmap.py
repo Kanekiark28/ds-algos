@@ -102,5 +102,59 @@ def group_anagrams(strs):
             d[anagram].append(word)
             
     return d.values()
+
+
+"""
+
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+
+The order of output does not matter.
+
+
+Input:
+s: "cbaebabacd" p: "abc"
+
+Output:
+[0, 6]
+
+Explanation:
+The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+
+"""
+
+def find_anagrams(s,p):
+    s_hash = {}
+    p_hash = {}
+    res = []
+    #count no of occurrences in p_hash
+    for i in range(len(p)):
+        if p[i] in p_hash:
+            p_hash[p[i]] += 1
+        else:
+            p_hash[p[i]] = 1
+
+    i = 0
+    j = 0
+
+    while j < len(s):
+        if s[j] in s_hash:
+            s_hash[s[j]] += 1
+        else:
+            s_hash[s[j]] = 1
+        if j >= len(p):
+            if s_hash[s[i]] == 1:
+                del s_hash[s[i]]
+            else:
+                s_hash[s[i]] -= 1
+            i += 1
+        if s_hash == p_hash:
+            res.append(i)
+        j += 1
+    return res
+        
+    
             
 print(two_sum([2,7,11,15],9))

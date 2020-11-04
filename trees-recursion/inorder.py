@@ -1,6 +1,18 @@
 """
-Inorder traversal of BST
-Order: LNR
+Trees:
+    Operations: 
+        InOrder: LNR
+        PreOrder: NLR
+        PostOrder: LRN
+    Complexities:
+        Insert: O(LogN)
+        Deletion: O(LogN)
+        LookUp: O(LogN)
+        
+    Problems types:
+        Iteratively
+        Recursively
+        BFS,DFS
 """
 
 from collections import deque

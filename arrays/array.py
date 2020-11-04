@@ -120,4 +120,48 @@ arr = [[1,2,3],[4,5,6],[7,8,9]]
 print(rotate_ninety(arr))
 
 
+"""
+Given a string s, find the length of the longest substring without repeating characters.
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+seen = (b,c,a)
+"""
+
+def longest_substring(s):
+    i = 0
+    j = 0
+    seen = set()
+    res = 0
+    
+    while j < len(s):
+        if s[j] not in seen:
+            seen.add(s[j])
+            j += 1
+            res = max(res,len(seen))
+        else:
+            seen.remove(s[i])
+            i += 1
+    return res
+
+"""
+
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Determine if you are able to reach the last index.
+
+"""
+
+def jump_game(nums):
+    
+    res = 0 
+    for i in range(len(nums)):
+        if res < i:
+            return False
+        res = max(res,i+nums[i])
+    return True
+        
+            
 
