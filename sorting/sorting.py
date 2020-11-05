@@ -19,7 +19,7 @@ def partition(nums,low,high):
     i = (low-1)
     
     for j in range(low,high):
-        print(i)
+        
         if nums[j] <= pivot:
             i += 1
             nums[i],nums[j] = nums[j],nums[i]
