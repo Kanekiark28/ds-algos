@@ -45,7 +45,7 @@ class Problems:
     Recall that a graph is bipartite if we can split its set of nodes into two independent subsets A and B, such that every edge in the graph has one node in A and another node in B.
 
     The graph is given in the following form: graph[i] is a list of indexes j for which the edge between nodes i and j exists.  Each node is an integer between 0 and graph.length - 1.  There are no self edges or parallel edges: graph[i] does not contain i, and it doesn't contain any element twice.
-    
+                      0     1     2     3
     Input: graph = [[1,3],[0,2],[1,3],[0,2]]
     Output: true
     Explanation: We can divide the vertices into two groups: {0, 2} and {1, 3}.
@@ -55,19 +55,26 @@ class Problems:
     Explanation: We cannot find a way to divide the set of nodes into two independent subsets.
     """
     def is_graph_bipartite(self,graph):
+        # number of nodes in graph
         num_of_nodes = len(graph)
+        
+        # color the nodes -> 0 not visited, 1 visiting, -1 visited
         colors = [0 for x in range(num_of_nodes)]
         
         for node in range(len(graph)):
+            #if current node has not been visited and color_dfs is false -> false
             if colors[node] == 0 and not (self.color_dfs(graph,node,colors,1)):
                 return False
         return True
     
     def color_dfs(self,graph,node,colors,color):
+        #if colors[node] is visiting or visited, check if it's the same color
         if colors[node] != 0:
             return colors[node] == color
         else:
+            #otherwise color the node with the given color
             colors[node] = color
+            #check all neighbors of the current node for same colors
             for nei in graph[node]:
                 if not (self.color_dfs(graph,nei,colors,-color)):
                     return False
@@ -106,7 +113,9 @@ class Problems:
         #build adjacency list
         for i in range(num_courses):
             self.adjacency_list[i] = []
-            
+        
+        #[[1,0],[0,1]]
+        #[[1],[0]]   
         for x,y in prerequisites:
             self.adjacency_list[x].append(y)
         
@@ -167,14 +176,18 @@ class Problems:
     
     def keys_and_rooms(rooms):
         
+        #create a set to track all keys
         visited = set()
         visited.add(0)
         stack = [0]
         
         while stack:
+            #get the keys for the given room
             keys = rooms[stack.pop()]
             
+            #iterate through keys
             for key in keys:
+                #if key not in set, add it to stack and set
                 if key not in visited:
                     visited.add(key)
                     stack.append(key)
